@@ -1,0 +1,10 @@
+{
+    "kws_cmds": [
+        { "kw": "fan", "cmd": "sh /root/cmds/fan.sh" },
+        { "kw": "live_vox", "cmd": "sh /root/cmds/voice_live.sh" },
+        { "kw": "video1", "cmd": "sh /root/cmds/video_f1.sh" },
+        { "kw": "video2", "cmd": "sh /root/cmds/video_f2.sh" },
+        { "kw": "cooldown", "cmd": "sh /root/cmds/cooldown.sh" },
+        { "kw": "laser", "cmd": "sh /root/cmds/laser.sh" }
+    ]
+}
