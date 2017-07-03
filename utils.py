@@ -81,7 +81,7 @@ class Command(object):
 
     def run(self, timeout):
         def target():
-            print('Thread started')
+            print('Thread started '+str(self.cmd))
             self.process = subprocess.Popen(self.cmd, shell=True)
             self.process.communicate()
             print('Thread finished')
