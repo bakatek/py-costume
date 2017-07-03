@@ -7,6 +7,7 @@ import random
 import uuid
 import time
 from storageCtrl import storageCtrl
+from kbSrv import kbSrv
 from string import Template
 import subprocess, threading
 
@@ -80,20 +81,20 @@ class Command(object):
 
     def run(self, timeout):
         def target():
-            print 'Thread started'
+            print('Thread started')
             self.process = subprocess.Popen(self.cmd, shell=True)
             self.process.communicate()
-            print 'Thread finished'
+            print('Thread finished')
 
         thread = threading.Thread(target=target)
         thread.start()
 
         thread.join(timeout)
         if thread.is_alive():
-            print 'Terminating process'
+            print('Terminating process')
             self.process.terminate()
             thread.join()
-        print self.process.returncode
+        print(self.process.returncode)
 
             
             

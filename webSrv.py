@@ -19,7 +19,7 @@ else:
 class MyRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
     def do_GET(self):
         allKWandCommands = storageCtrl.getkeywordsAndCommands()
-        for [kw, command] in allKWandCommands:
+        for [kw, kb, command] in allKWandCommands:
             if self.path.split("?")[0] == '/www/'+kw:
                 storageCtrl.pushWebRequest(command)
                 self.path = '/www/index.html'

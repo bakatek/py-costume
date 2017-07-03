@@ -1,10 +1,13 @@
 {
     "kws_cmds": [
-        { "kw": "fan", "cmd": "sh /root/cmds/fan.sh" },
-        { "kw": "live_vox", "cmd": "sh /root/cmds/voice_live.sh" },
-        { "kw": "video1", "cmd": "sh /root/cmds/video_f1.sh" },
-        { "kw": "video2", "cmd": "sh /root/cmds/video_f2.sh" },
-        { "kw": "cooldown", "cmd": "sh /root/cmds/cooldown.sh" },
-        { "kw": "laser", "cmd": "sh /root/cmds/laser.sh" }
+        { "kw": "fan", "kb": "5", "cmd": "sh /root/cmds/fan.sh" },
+        { "kw": "live_vox", "kb": "6", "cmd": "sh /root/cmds/voice_live.sh" },
+        { "kw": "video1", "kb": "7", "cmd": "sh /root/cmds/video_f1.sh" },
+        { "kw": "video2", "kb": "8", "cmd": "sh /root/cmds/video_f2.sh" },
+        { "kw": "cooldown", "kb": "9", "cmd": "sh /root/cmds/cooldown.sh" },
+        { "kw": "laser", "kb": "1", "cmd": "sh /root/cmds/laser.sh" },
+        { "kw": "moveup", "kb": "2", "cmd": "sh /root/cmds/moveUpNoLaser.sh" },
+        { "kw": "movedown", "kb": "3", "cmd": "sh /root/cmds/moveDown.sh" },
+        { "kw": "movedown2", "kb": "4", "cmd": "sh /root/cmds/moveDownLaser.sh" }
     ]
 }

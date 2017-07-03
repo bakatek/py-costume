@@ -9,6 +9,7 @@ Created on 23 sept. 2014
 from time import sleep
 from storageCtrl import storageCtrl
 from utils import utils
+from kbSrv import kbSrv
 #from pprint import pprint
 
 if __name__ == '__main__':
@@ -39,15 +40,15 @@ try:
     from senderCtrl import senderCtrl
     senderCtrl_t = senderCtrl(utils_c)
     senderCtrl_t.start()
+    kbSrv_t = kbSrv(utils_c,0.1)
+    kbSrv_t.start()
     
-    utils_c.echo("************************************************************************",True)
     try:
         if platform.python_version().find("3.") != -1:
             raw_input = input
     except:
         pass
-    #inputKeyb = raw_input('Press "q" to Quit: ')
-    #FileMode = None
+
     while True and storageCtrl.getStopRequested()==False:
         sleep(1)
     

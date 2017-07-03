@@ -23,11 +23,7 @@ class senderCtrl(Thread):
         super(senderCtrl,self).__init__()
         #self.storageCtrl_t = _storageCtrl
         self.utils_c = _utils_c
-        self.refreshRate = 1
-        self.webSrv_t = webSrv(self.utils_c,8080,0.1)
-        
-        self.webSrv_t.start()
-        
+        self.refreshRate = 1        
         self.out("init senderCtrl")
         
     def stop(self):
@@ -35,12 +31,13 @@ class senderCtrl(Thread):
         self.webSrv_t.stop()
         storageCtrl.removeThreadToStop(self)
     
-    def start(self):
+    def run(self):
         self.out("start senderCtrl")
         
         storageCtrl.addThreadToStop(self)
         
-        
+        self.webSrv_t = webSrv(self.utils_c,8080,0.1)
+        self.webSrv_t.start()
         while storageCtrl.getStopRequested() == False:
             newWebReq = storageCtrl.getWebRequest()
             if newWebReq != None:

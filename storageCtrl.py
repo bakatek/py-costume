@@ -23,7 +23,7 @@ class storageCtrl(object):
         #super(storageCtrl,self).__init__()
         storageCtrl.Version = "0.0.0.1"
         storageCtrl.DEBUG = True
-        storageCtrl.verboseLevel = 1
+        storageCtrl.verboseLevel = 0
         storageCtrl.platformVersion = -1
         storageCtrl.dataFile = "datas.json"
         
@@ -76,8 +76,8 @@ class storageCtrl(object):
                 jsonContent = json.load(data_file)
                 for item in jsonContent['kws_cmds']:
                     splittedCmd = item['cmd'].split(' ')
-                    if len(splittedCmd) == 2 and splittedCmd[1].find(".sh") and os.path.isfile(splittedCmd[1]):
-                        storageCtrl.keywordsAndCmds.append([item['kw'], item['cmd']])
+                    if len(splittedCmd) == 2 and splittedCmd[1].find(".sh"):# and os.path.isfile(splittedCmd[1]):
+                        storageCtrl.keywordsAndCmds.append([item['kw'],item['kb'], item['cmd']])
                         storageCtrl.utils_c.echo("  OK".ljust(8) + item['kw'].ljust(15) + "   " + item['cmd'], True)
                     else:
                         storageCtrl.utils_c.echo("  F-ERR".ljust(8) + item['kw'].ljust(15) + "   " + item['cmd'], True)
