@@ -41,9 +41,6 @@ class senderCtrl(Thread):
         while storageCtrl.getStopRequested() == False:
             newWebReq = storageCtrl.getWebRequest()
             if newWebReq != None:
-                self.utils_c.execute_cmd(newWebReq[1])
-                if newWebReq[0] == "send":
-                    if len(newWebReq) == 2:
-                        self.sendMail(newWebReq[1])
+                self.utils_c.execute_cmd(newWebReq)
             sleep(self.refreshRate)
         storageCtrl.stopAcheived = storageCtrl.getStopAcheived() - 1

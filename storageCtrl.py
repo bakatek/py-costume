@@ -136,7 +136,7 @@ class storageCtrl(object):
 
     @staticmethod
     def pushWebRequest(_value):
-        #print("push %s ",_value)
+        print("push %s ",_value)
         storageCtrl.WebRequests.append(_value)
     
     @staticmethod
