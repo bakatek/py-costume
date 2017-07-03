@@ -76,7 +76,7 @@ class storageCtrl(object):
                 jsonContent = json.load(data_file)
                 for item in jsonContent['kws_cmds']:
                     splittedCmd = item['cmd'].split(' ')
-                    if len(splittedCmd) == 2 and splittedCmd[1].find(".sh"):# and os.path.isfile(splittedCmd[1]):
+                    if len(splittedCmd) == 2 and splittedCmd[1].find(".sh") and os.path.isfile(splittedCmd[1]):
                         storageCtrl.keywordsAndCmds.append([item['kw'],item['kb'], item['cmd']])
                         storageCtrl.utils_c.echo("  OK".ljust(8) + item['kw'].ljust(15) + "   " + item['cmd'], True)
                     else:
