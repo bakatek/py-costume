@@ -58,6 +58,8 @@ class kbSrv(Thread):
                 allKWandCommands = storageCtrl.getkeywordsAndCommands()
                 for [kw, kb, command] in allKWandCommands:
                     if c == kb:
+                        from pprint import pprint
+                        pprint(allKWandCommands)
                         storageCtrl.pushWebRequest(command)
             except:
                 self.out("Error on keypressed")
