@@ -7,7 +7,6 @@ Created on 23 sept. 2014
 import os
 from time import sleep
 from threading import Thread
-from webSrv import webSrv
 from storageCtrl import storageCtrl
 from gpioEx import gpioEx
 #from pprint import pprint
@@ -30,18 +29,28 @@ class gpioCtrl(Thread):
         
     def stop(self):
         self.out("stop gpioCtrl")
-        self.webSrv_t.stop()
         storageCtrl.removeThreadToStop(self)
     
     def run(self):
         self.out("start gpioCtrl")
-        
         storageCtrl.addThreadToStop(self)
         while storageCtrl.getStopRequested() == False:
             newWebReq = storageCtrl.getGpioRequest()
             if newWebReq != None:
-                splittedReq = newWebReq.split("|")
-                if splittedReq.length == 2:
-                    self.gpio_c.move_servo(splittedReq[0], splittedReq[1])
+                everyActions = newWebReq.split(";")
+                for action in everyActions:
+                    [chan, pos, delay] = action.split("|")
+                    pos = int(pos)
+                    delay = float(delay)
+                    if chan[:3] == "pwm" and pos:
+                        self.gpio_c.move_servo(int(chan[3:]), pos)
+                    elif chan[:3] != "pwm" and pos != None:
+                        self.gpio_c.set_gpio(chan, pos)
+                    else:
+                        print("ERROR no rules chan:%s pos:%s delay:%s",chan, pos, delay)
+                    if delay:
+                        while delay > 0 and storageCtrl.getStopRequested() == False:
+                            sleep(0.1)
+                            delay = delay - 0.1
             sleep(self.refreshRate)
         storageCtrl.stopAcheived = storageCtrl.getStopAcheived() - 1

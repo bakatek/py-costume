@@ -56,7 +56,7 @@ class storageCtrl(object):
         storageCtrl.stopAcheived = 0
         storageCtrl.stopRequested = False
         
-        storaceCtrl.gpioReq = []
+        storageCtrl.gpioReq = []
         #storageCtrl.setStopAcheived = False
         
         storageCtrl.RedLight = "P8_10"

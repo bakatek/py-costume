@@ -28,7 +28,7 @@ class senderCtrl(Thread):
         
     def stop(self):
         self.out("stop senderCtrl")
-        self.webSrv_t.stop()
+        # self.webSrv_t.stop()
         storageCtrl.removeThreadToStop(self)
     
     def run(self):
@@ -36,11 +36,12 @@ class senderCtrl(Thread):
         
         storageCtrl.addThreadToStop(self)
         
-        self.webSrv_t = webSrv(self.utils_c,8080,0.1)
-        self.webSrv_t.start()
+        # self.webSrv_t = webSrv(self.utils_c,8080,0.1)
+        # self.webSrv_t.start()
         while storageCtrl.getStopRequested() == False:
             newWebReq = storageCtrl.getWebRequest()
             if newWebReq != None:
                 self.utils_c.execute_cmd(newWebReq)
+            # print(".1")
             sleep(self.refreshRate)
         storageCtrl.stopAcheived = storageCtrl.getStopAcheived() - 1

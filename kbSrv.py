@@ -56,11 +56,15 @@ class kbSrv(Thread):
                         break
                     self.out(str(ord(c)) + "=" + c)
                 allKWandCommands = storageCtrl.getkeywordsAndCommands()
-                for [kw, kb, command] in allKWandCommands:
+                for [kw, kb, command, gpio] in allKWandCommands:
                     if c == kb:
-                        storageCtrl.pushWebRequest(command)
+                        if command != "":
+                            storageCtrl.pushWebRequest(command)
+                        elif gpio != "":
+                            storageCtrl.pushGpioRequest(gpio)
             except:
                 self.out("Error on keypressed")
+            # print(".2")
             sleep(self.refreshRate)
         my_kb.set_normal_term()
         storageCtrl.stopAcheived = storageCtrl.getStopAcheived() - 1

@@ -8,7 +8,8 @@
         { "kw": "laser", "kb": "1", "cmd": "sh /root/cmds/laser.sh", "gpio": "" },
         { "kw": "moveup", "kb": "2", "cmd": "sh /root/cmds/moveUpNoLaser.sh", "gpio": "" },
         { "kw": "movedown", "kb": "3", "cmd": "sh /root/cmds/moveDown.sh", "gpio": "" },
+        { "kw": "movedown2", "kb": "q", "cmd": "", "gpio": "0|0|1" },
         { "kw": "movedown2", "kb": "4", "cmd": "sh /root/cmds/moveDownLaser.sh", "gpio": "" },
-        { "kw": "test", "kb": "0", "cmd": "", "gpio": "1|1" }
+        { "kw": "test3", "kb": "0", "cmd": "", "gpio": "pwm0|1|10" }
     ]
 }
