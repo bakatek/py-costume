@@ -55,6 +55,8 @@ class storageCtrl(object):
         storageCtrl.mailReq = []
         storageCtrl.stopAcheived = 0
         storageCtrl.stopRequested = False
+        
+        storaceCtrl.gpioReq = []
         #storageCtrl.setStopAcheived = False
         
         storageCtrl.RedLight = "P8_10"
@@ -70,20 +72,20 @@ class storageCtrl(object):
     
     @staticmethod
     def loadExternalDatas():
-        storageCtrl.utils_c.echo("----------------------  kw/cmd  ----------------------", True)
+        storageCtrl.utils_c.echo("-------------------------  kw/cmd  -------------------------", True)
         if os.path.isfile(storageCtrl.dataFile):
             with open(storageCtrl.dataFile) as data_file:
                 jsonContent = json.load(data_file)
                 for item in jsonContent['kws_cmds']:
                     splittedCmd = item['cmd'].split(' ')
-                    if len(splittedCmd) == 2 and splittedCmd[1].find(".sh") and os.path.isfile(splittedCmd[1]):
-                        storageCtrl.keywordsAndCmds.append([item['kw'],item['kb'], item['cmd']])
-                        storageCtrl.utils_c.echo("  OK".ljust(8) + item['kw'].ljust(15) + "   " + item['cmd'], True)
+                    if (len(splittedCmd) == 2 and splittedCmd[1].find(".sh") and os.path.isfile(splittedCmd[1])) or item['gpio'] != "":
+                        storageCtrl.keywordsAndCmds.append([item['kw'],item['kb'], item['cmd'], item['gpio']])
+                        storageCtrl.utils_c.echo("  OK".ljust(8) + item['kw'].ljust(14) + " " + item['kb'].ljust(3)+ " " + item['gpio'].ljust(5) + " " + item['cmd'], True)
                     else:
-                        storageCtrl.utils_c.echo("  F-ERR".ljust(8) + item['kw'].ljust(15) + "   " + item['cmd'], True)
+                        storageCtrl.utils_c.echo("  F-ERR".ljust(8) + item['kw'].ljust(14) + " " + item['kb'].ljust(3)+ " " + item['gpio'].ljust(5) + " " + item['cmd'], True)
         else:
             return None
-        storageCtrl.utils_c.echo("------------------------------------------------------", True)
+        storageCtrl.utils_c.echo("------------------------------------------------------------", True)
         #pprint(storageCtrl.keywordsAndCmds)
     
     @staticmethod
@@ -145,6 +147,19 @@ class storageCtrl(object):
 
         if len(storageCtrl.WebRequests) > 0:
             return storageCtrl.WebRequests.pop(0)
+        else:
+            return None
+
+    @staticmethod
+    def pushGpioRequest(_value):
+        print("push %s ",_value)
+        storageCtrl.gpioReq.append(_value)
+    
+    @staticmethod
+    def getGpioRequest():
+        #print("Return %s ",storageCtrl.WebRequests)
+        if len(storageCtrl.gpioReq) > 0:
+            return storageCtrl.gpioReq.pop(0)
         else:
             return None
     
