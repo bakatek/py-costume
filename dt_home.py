@@ -10,6 +10,7 @@ from time import sleep
 from storageCtrl import storageCtrl
 from utils import utils
 from kbSrv import kbSrv
+from inputSrv import inputSrv
 from gpioCtrl import gpioCtrl
 #from pprint import pprint
 
@@ -44,6 +45,9 @@ try:
     from senderCtrl import senderCtrl
     senderCtrl_t = senderCtrl(utils_c)
     senderCtrl_t.start()
+    inputSrv_t = inputSrv(utils_c,0.5)
+    inputSrv_t.start()
+    
     kbSrv_t = kbSrv(utils_c,0.5)
     kbSrv_t.start()
     
